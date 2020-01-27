@@ -1,12 +1,12 @@
 package com.bibash.CanteenProject.core.enums;
 
-public enum RoleType {
-    ADMIN("ADMIN"), STUDENT("STUDENT"),KITCHENER("KITCHENER");
+public enum OrderStatus {
+    READY("Ready"),PENDING("Pending"),DELIVERED("delivered");
 
     private final String value;
 
-    RoleType(String value) {
-        this.value = value;
+    OrderStatus(String orderStatus) {
+        this.value=orderStatus;
     }
 
     @Override
@@ -18,13 +18,12 @@ public enum RoleType {
         return value;
     }
 
-    public static RoleType getEnum(String value) {
+    public static OrderStatus getEnum(String value) {
         if (value == null)
             throw new IllegalArgumentException();
-        for (RoleType v : values())
+        for (OrderStatus v : values())
             if (value.equalsIgnoreCase(v.getValue()))
                 return v;
         throw new IllegalArgumentException();
     }
-
 }

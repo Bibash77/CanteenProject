@@ -1,15 +1,31 @@
 package com.bibash.CanteenProject.api.User;
 
-import com.bibash.CanteenProject.api.standards.Standard;
-import com.bibash.CanteenProject.core.enums.RoleType;
-import com.bibash.CanteenProject.core.enums.Status;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.persistence.*;
+import java.math.BigInteger;
 import java.util.List;
 
+import com.bibash.CanteenProject.api.OrderItem.ItemOrder;
+import com.bibash.CanteenProject.api.Wallet.Wallet;
+import com.bibash.CanteenProject.core.BaseEntity;
+import com.bibash.CanteenProject.core.enums.RoleType;
+import com.bibash.CanteenProject.core.enums.Status;
+
+import javax.persistence.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Lazy;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name="user")
-public class User {
+public class User extends BaseEntity {
+
+    @Id
+    @GeneratedValue
+    private Long id;
 
     @Column(name = "user_name", unique = true, nullable = false)
     private String username;
@@ -20,26 +36,25 @@ public class User {
     @Column(nullable = false)
     private RoleType roleType;
 
+    @Column(nullable = false)
+    private String userCode;
+
+    @Column(nullable = false)
     private String password;
 
-    private List<Standard> standardList;
+    private String Batch;
 
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String email;
 
     @Enumerated(EnumType.ORDINAL)
     private Status status;
 
-    @Transient
-    private MultipartFile studentImage;
+    @OneToMany
+    @Lazy
+    private List<ItemOrder> itemOrder;
 
-    private String studentImagePath;
-
-    private List<String> authorityList; //access of feautures/tab
-
-
-    public String getUsername() {
-        return this.username;
-    }
+    @Column
+    private Double walletAmount;
 
 }
