@@ -6,18 +6,20 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-
+import com.bibash.CanteenProject.api.TopUpHistory.Service.TopUpHistoryService;
 import com.bibash.CanteenProject.api.Wallet.Wallet;
 import com.bibash.CanteenProject.api.Wallet.WalletRepo.WalletRepository;
-import com.bibash.CanteenProject.core.enums.Status;
 
 @Service("walletService")
 public class WalletServiceImpl implements WalletService{
     private final WalletRepository walletRepository;
+    private final TopUpHistoryService topUpHistoryService;
 
     public WalletServiceImpl(
-        WalletRepository walletRepository) {
+        WalletRepository walletRepository,
+        TopUpHistoryService topUpHistoryService) {
         this.walletRepository = walletRepository;
+        this.topUpHistoryService = topUpHistoryService;
     }
 
     @Override
@@ -42,21 +44,19 @@ public class WalletServiceImpl implements WalletService{
 
     @Override
     public Wallet save(Wallet wallet) {
-        Wallet userWallet = new Wallet();
-        if(wallet.getId() == null){
-            userWallet.setWalletExpenditure(0.0);
-            userWallet.setWalletAmount(0.0);
-        }else {
-            userWallet = topUp(wallet);
+        if(wallet.getId() == null) {
+            wallet.setWalletExpenditure(0.0);
+            wallet.setWalletAmount(0.0);
         }
-        return walletRepository.save(userWallet);
+        return walletRepository.save(wallet);
     }
 
     @Override
     public Wallet topUp(Wallet wallet) {
         Wallet userWallet = walletRepository.findWalletByUser(wallet.getUser());
-        userWallet.getUser().setWalletAmount(userWallet.getWalletAmount() + wallet.getDepositAmount());
         userWallet.setWalletAmount(userWallet.getWalletAmount() + wallet.getDepositAmount());
+        userWallet.setDepositAmount(wallet.getDepositAmount());
+        topUpHistoryService.saveHistoryFromWallet(userWallet);
         return walletRepository.save(userWallet);
     }
 }

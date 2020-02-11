@@ -8,4 +8,6 @@ public interface UserService  extends BaseService<User> {
     public String userCodeGenerateor();
 
     public User changeStatus(User user);
+
+    public User findUserByName(String userName);
 }

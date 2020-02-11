@@ -1,43 +1,32 @@
-package com.bibash.CanteenProject.api.Transaction;
+package com.bibash.CanteenProject.api.TopUpHistory;
 
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import org.springframework.data.annotation.CreatedDate;
-
-import com.bibash.CanteenProject.core.enums.TransactionType;
-
-@Entity
 @Data
+@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "transaction")
-public class Transaction {
-
+public class TopUpHistory {
     @Id
     @GeneratedValue
     private Long id;
 
-    private String message;
+    private double topUpAmount;
 
-    private TransactionType transactionType;
+    private double remainingAmount;
 
-    private double amount;
-
-    private boolean is_unread;
-
+    private Long userId;
 
     @Column(name = "created_at", nullable = false, updatable = false)
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdAt = new Date();
-
 }

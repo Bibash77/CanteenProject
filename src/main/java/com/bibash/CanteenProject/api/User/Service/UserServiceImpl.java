@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public String userCodeGenerateor() {
-        String userCode = String.valueOf(new Random().nextInt(1000)).concat(String.valueOf(new Date().getDate()));
+        String userCode = String.valueOf(new Random().nextInt(1000)).concat(String.valueOf(new Date().getDate()) + String.valueOf(new Date().getSeconds()));
         return userCode;
     }
 
@@ -71,5 +71,10 @@ public class UserServiceImpl implements UserService{
             user.setStatus(Status.INACTIVE);
         }
         return userRepository.save(user);
+    }
+
+    @Override
+    public User findUserByName(String userName) {
+        return userRepository.findUserByUserName(userName);
     }
 }

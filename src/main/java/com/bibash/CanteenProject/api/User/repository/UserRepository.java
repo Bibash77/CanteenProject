@@ -6,4 +6,5 @@ import com.bibash.CanteenProject.api.User.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
+    User findUserByUserName(String userName);
 }

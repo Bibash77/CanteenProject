@@ -28,7 +28,7 @@ public class User extends BaseEntity {
     private Long id;
 
     @Column(name = "user_name", unique = true, nullable = false)
-    private String username;
+    private String userName;
 
     @Column(name = "Full_Name")
     private String fullName;
@@ -51,7 +51,6 @@ public class User extends BaseEntity {
     private Status status;
 
     @OneToMany
-    @Lazy
     private List<ItemOrder> itemOrder;
 
     @Column
