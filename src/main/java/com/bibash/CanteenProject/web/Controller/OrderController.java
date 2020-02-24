@@ -39,6 +39,11 @@ public class OrderController {
     return new RestResponseDto().successModel(orderService.save(orderDtoConverter.order(orderDto)));
     }
 
+    @PostMapping("/changeStatus")
+    public ResponseEntity<?> orderAction(@RequestBody OrderDto orderDto) {
+        return new RestResponseDto().successModel(orderService.orderAction(orderDto));
+    }
+
     @GetMapping("/pageable/{id}")
     public ResponseEntity<?> getPageableById(@PathVariable Long id) {
         return new RestResponseDto().successModel(orderService.findAllPageableById(id ,

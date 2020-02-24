@@ -65,12 +65,11 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User changeStatus(User user) {
-        if (user.getStatus() == Status.INACTIVE) {
-            user.setStatus(Status.ACTIVE);
-        } else {
-            user.setStatus(Status.INACTIVE);
-        }
-        return userRepository.save(user);
+        User user1 = userRepository.getOne(user.getId());
+        user1.setStatus(user.getStatus());
+        user1.setRoleType(user.getRoleType());
+
+        return userRepository.save(user1);
     }
 
     @Override

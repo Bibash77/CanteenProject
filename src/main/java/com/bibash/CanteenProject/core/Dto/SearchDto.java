@@ -17,4 +17,8 @@ public class SearchDto {
    private String createdAt;
 
    private OrderStatus orderStatus;
+
+   private String orderCode;
+
+   private String itemName;
 }

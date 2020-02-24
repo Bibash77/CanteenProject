@@ -14,8 +14,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import com.bibash.CanteenProject.api.OrderItem.ItemOrder;
+import com.bibash.CanteenProject.api.OrderItem.OrderDto;
 import com.bibash.CanteenProject.api.OrderItem.repository.OrderRepository;
 import com.bibash.CanteenProject.api.OrderItem.repository.OrderSpecBuilder;
 import com.bibash.CanteenProject.core.Dto.SearchDto;
@@ -98,6 +100,17 @@ public class OrderServiceImpl implements OrderService{
         itemOrders.addAll(query.list());
         return itemOrders;*/
     }
+
+    @Override
+    public ItemOrder orderAction(OrderDto orderDto) {
+        ItemOrder itemOrder = orderRepository.findAllByIdAndOrderCode(orderDto.getId() , orderDto.getOrderCode());
+        if(!ObjectUtils.isEmpty(itemOrder)){
+            itemOrder.setOrderStatus(orderDto.getOrderStatus());
+            return  orderRepository.save(itemOrder);
+        }
+        return null;
+    }
+
     @Override
     public OrderSpecBuilder getSpec(Map<String, String> filterParams) {
         return new OrderSpecBuilder(filterParams);
