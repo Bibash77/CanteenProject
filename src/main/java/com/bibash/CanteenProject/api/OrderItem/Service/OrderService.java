@@ -17,7 +17,7 @@ public interface OrderService extends BaseService<ItemOrder> {
 
     public List<ItemOrder> findAllById(Long id);
 
-    List<ItemOrder> findBySearchObject(SearchDto searchObj);
+    Page<ItemOrder> findBySearchObject(SearchDto searchObj , Pageable pageable);
 
     ItemOrder orderAction(OrderDto orderDto);
 

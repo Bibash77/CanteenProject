@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bibash.CanteenProject.api.OrderItem.ItemOrder;
@@ -50,9 +51,8 @@ public class OrderController {
             PaginationUtils.pageable(1, 5)));
     }
     @PostMapping("/history")
-    public ResponseEntity<?> search(@RequestBody SearchDto searchDto) {
+    public ResponseEntity<?> search(@RequestBody SearchDto searchDto, @RequestParam("page") int page, @RequestParam("size") int size) {
         List<ItemOrder> itemOrderList;
-        itemOrderList = orderService.findBySearchObject(searchDto);
-        return new RestResponseDto().successModel(itemOrderList);
+        return new RestResponseDto().successModel(orderService.findBySearchObject(searchDto, PaginationUtils.pageable(page, size)));
     }
 }

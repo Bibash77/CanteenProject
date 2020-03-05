@@ -72,12 +72,12 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public List<ItemOrder> findBySearchObject(SearchDto searchObj) {
+    public Page<ItemOrder> findBySearchObject(SearchDto searchObj , Pageable pageable) {
         Map<String, String> s = objectMapper.convertValue(searchObj, Map.class);
         s.values().removeIf(Objects::isNull);
         final OrderSpecBuilder orderSpecBuilder = new OrderSpecBuilder(s);
         final Specification<ItemOrder> specification = orderSpecBuilder.build();
-        return orderRepository.findAll(specification);
+        return orderRepository.findAll(specification , pageable);
 /*        List<ItemOrder> itemOrders = new ArrayList<>();
         entityManager = entityManager.getEntityManagerFactory().createEntityManager();
 
