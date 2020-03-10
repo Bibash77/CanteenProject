@@ -28,8 +28,6 @@ public class OrderServiceImpl implements OrderService{
     private OrderRepository orderRepository;
     private ObjectMapper objectMapper = new ObjectMapper();
 
-    @PersistenceContext
-    private EntityManager entityManager;
 
     public OrderServiceImpl(
         OrderRepository orderRepository) {

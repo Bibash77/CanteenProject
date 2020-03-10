@@ -52,7 +52,6 @@ public class OrderController {
     }
     @PostMapping("/history")
     public ResponseEntity<?> search(@RequestBody SearchDto searchDto, @RequestParam("page") int page, @RequestParam("size") int size) {
-        List<ItemOrder> itemOrderList;
         return new RestResponseDto().successModel(orderService.findBySearchObject(searchDto, PaginationUtils.pageable(page, size)));
     }
 }

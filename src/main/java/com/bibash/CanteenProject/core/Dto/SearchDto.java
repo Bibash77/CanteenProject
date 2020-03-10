@@ -14,7 +14,7 @@ public class SearchDto {
 
    private String userId;
 
-   private String createdAt;
+   private String date;
 
    private OrderStatus orderStatus;
 

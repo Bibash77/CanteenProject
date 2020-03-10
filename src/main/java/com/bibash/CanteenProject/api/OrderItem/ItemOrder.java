@@ -1,6 +1,7 @@
 package com.bibash.CanteenProject.api.OrderItem;
 
 import java.math.BigInteger;
+import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,11 +14,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.annotation.CreatedDate;
 
 import com.bibash.CanteenProject.api.Item.Item;
 import com.bibash.CanteenProject.api.User.User;
@@ -29,7 +32,7 @@ import com.bibash.CanteenProject.core.enums.OrderStatus;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="item_order")
-public class ItemOrder extends BaseEntity {
+public class ItemOrder {
     @Id
     @GeneratedValue
     private Long id;
@@ -49,5 +52,10 @@ public class ItemOrder extends BaseEntity {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     private User user = new User();
+
+    @CreatedDate
+    @Column(name = "created_at", nullable = false, updatable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createdAt = new Date();
 
 }

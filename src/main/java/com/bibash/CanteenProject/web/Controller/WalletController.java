@@ -13,6 +13,7 @@ import com.bibash.CanteenProject.api.TopUpHistory.Service.TopUpHistoryService;
 import com.bibash.CanteenProject.api.Wallet.Wallet;
 import com.bibash.CanteenProject.api.Wallet.WalletService.WalletService;
 import com.bibash.CanteenProject.core.Dto.RestResponseDto;
+import com.bibash.CanteenProject.core.PaginationUtils;
 
 @RestController
 @RequestMapping("v1/wallet")
@@ -51,5 +52,13 @@ public class WalletController {
     @GetMapping(value = "/history/{id}")
     public ResponseEntity<?> getTopUpHistory(@PathVariable Long id){
         return new RestResponseDto().successModel(topUpHistoryService.getHistoryById(id));
+    }
+
+    @PostMapping(value = "/list")
+    public ResponseEntity<?> getAllByPagination(@RequestBody Object searchDto,
+        @RequestParam("page") int page, @RequestParam("size") int size) {
+        return new RestResponseDto()
+            .successModel(walletService.findAllPageable(searchDto, PaginationUtils
+                .pageable(page, size)));
     }
 }

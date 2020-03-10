@@ -1,5 +1,8 @@
 package com.bibash.CanteenProject.api.OrderItem;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
@@ -46,6 +49,7 @@ public class OrderDtoConverter {
             itemOrder.setItemName(orderDto.getItem().getItemName());
             itemOrder.setOrderStatus(OrderStatus.PENDING);
             itemOrder.getUser().setId(orderDto.getUserId());
+            itemOrder.setCreatedAt(new Date());
         }
         Wallet wallet = deduct(orderDto.getUserId() , itemOrder.getExpenditure());
         return itemOrder;

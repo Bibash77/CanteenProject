@@ -1,19 +1,28 @@
 package com.bibash.CanteenProject.api.Wallet.WalletService;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.bibash.CanteenProject.api.OrderItem.ItemOrder;
+import com.bibash.CanteenProject.api.OrderItem.repository.OrderSpecBuilder;
 import com.bibash.CanteenProject.api.TopUpHistory.Service.TopUpHistoryService;
 import com.bibash.CanteenProject.api.Wallet.Wallet;
 import com.bibash.CanteenProject.api.Wallet.WalletRepo.WalletRepository;
+import com.bibash.CanteenProject.api.Wallet.WalletRepo.WalletSpecBuilder;
 
 @Service("walletService")
 public class WalletServiceImpl implements WalletService{
     private final WalletRepository walletRepository;
     private final TopUpHistoryService topUpHistoryService;
+
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     public WalletServiceImpl(
         WalletRepository walletRepository,
@@ -33,8 +42,12 @@ public class WalletServiceImpl implements WalletService{
     }
 
     @Override
-    public Page<Wallet> findAllPageable(Object t, Pageable pageable) {
-        return null;
+    public Page<Wallet> findAllPageable(Object searchObj, Pageable pageable) {
+        Map<String, String> s = objectMapper.convertValue(searchObj, Map.class);
+        s.values().removeIf(Objects::isNull);
+        final WalletSpecBuilder walletSpecBuilder = new WalletSpecBuilder(s);
+        final Specification<Wallet> specification = walletSpecBuilder.build();
+        return walletRepository.findAll(specification , pageable);
     }
 
     @Override
