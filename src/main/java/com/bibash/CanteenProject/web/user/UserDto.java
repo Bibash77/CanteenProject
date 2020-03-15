@@ -20,4 +20,6 @@ public class UserDto {
     private Double walletAmount;
 
     private Status status;
+
+    private String userCode;
 }
