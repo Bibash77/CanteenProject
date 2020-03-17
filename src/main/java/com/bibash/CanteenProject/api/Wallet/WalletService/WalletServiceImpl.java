@@ -1,5 +1,6 @@
 package com.bibash.CanteenProject.api.Wallet.WalletService;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -71,5 +72,10 @@ public class WalletServiceImpl implements WalletService{
         userWallet.setDepositAmount(wallet.getDepositAmount());
         topUpHistoryService.saveHistoryFromWallet(userWallet);
         return walletRepository.save(userWallet);
+    }
+
+    @Override
+    public Map topUpCount(Date startDate, Date endDate, Long id) {
+        return walletRepository.findSumOfOrder(startDate , endDate);
     }
 }

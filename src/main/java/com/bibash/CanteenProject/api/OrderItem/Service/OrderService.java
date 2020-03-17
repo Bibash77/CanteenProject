@@ -1,5 +1,6 @@
 package com.bibash.CanteenProject.api.OrderItem.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,8 @@ public interface OrderService extends BaseService<ItemOrder> {
     Page<ItemOrder> findBySearchObject(SearchDto searchObj , Pageable pageable);
 
     ItemOrder orderAction(OrderDto orderDto);
+
+    Map<String, Integer> orderCount(Date startDate , Date endDate);
 
       public BaseSpecBuilder<ItemOrder> getSpec(Map<String, String> filterParams);
 }

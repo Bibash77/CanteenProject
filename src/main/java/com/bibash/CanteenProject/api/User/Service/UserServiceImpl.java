@@ -1,7 +1,9 @@
 package com.bibash.CanteenProject.api.User.Service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.springframework.data.domain.Page;
@@ -75,5 +77,12 @@ public class UserServiceImpl implements UserService{
     @Override
     public User findUserByName(String userName) {
         return userRepository.findUserByUserName(userName);
+    }
+
+    @Override
+    public Map<String , Long> countUser(Date startDate, Date endDate, Status status) {
+        Map<String , Long> map = new HashMap<>();
+        map.put("user", userRepository.countByStatus(status));
+        return map;
     }
 }

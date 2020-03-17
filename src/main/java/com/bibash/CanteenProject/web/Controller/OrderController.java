@@ -1,5 +1,8 @@
 package com.bibash.CanteenProject.web.Controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,5 +56,10 @@ public class OrderController {
     @PostMapping("/history")
     public ResponseEntity<?> search(@RequestBody SearchDto searchDto, @RequestParam("page") int page, @RequestParam("size") int size) {
         return new RestResponseDto().successModel(orderService.findBySearchObject(searchDto, PaginationUtils.pageable(page, size)));
+    }
+
+    @GetMapping("/count")
+    public ResponseEntity<?> getSumCount(@RequestParam String startDate , @RequestParam String endDate) {
+        return new RestResponseDto().successModel(orderService.orderCount(new Date(startDate), new Date(endDate)));
     }
 }

@@ -22,4 +22,6 @@ public class UserDto {
     private Status status;
 
     private String userCode;
+
+    private String fullName;
 }

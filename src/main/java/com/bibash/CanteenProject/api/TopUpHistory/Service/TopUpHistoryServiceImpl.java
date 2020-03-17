@@ -3,6 +3,7 @@ package com.bibash.CanteenProject.api.TopUpHistory.Service;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -60,5 +61,10 @@ public class TopUpHistoryServiceImpl implements TopUpHistoryService{
     @Override
     public List<TopUpHistory> getHistoryById(Long id) {
         return topUpRepo.findAllByUserId(id);
+    }
+
+    @Override
+    public Map topUpCount(Date startDate, Date endDate, Long id) {
+        return topUpRepo.findSumOfOrder(startDate , endDate);
     }
 }

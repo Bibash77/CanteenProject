@@ -1,5 +1,7 @@
 package com.bibash.CanteenProject.web.Controller;
 
+import java.util.Date;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -60,5 +62,9 @@ public class WalletController {
         return new RestResponseDto()
             .successModel(walletService.findAllPageable(searchDto, PaginationUtils
                 .pageable(page, size)));
+    }
+    @GetMapping("/topUpUpCount")
+    public ResponseEntity<?> getSumCount(@RequestParam String startDate , @RequestParam String endDate) {
+        return new RestResponseDto().successModel(topUpHistoryService.topUpCount(new Date(startDate), new Date(endDate), null));
     }
 }

@@ -17,16 +17,19 @@ import javax.persistence.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import com.bibash.CanteenProject.api.User.User;
+import com.bibash.CanteenProject.core.BaseEntity;
 
 @Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "wallet")
-public class Wallet {
+@EqualsAndHashCode(callSuper = true)
+public class Wallet extends BaseEntity {
 
     @Id
     @GeneratedValue

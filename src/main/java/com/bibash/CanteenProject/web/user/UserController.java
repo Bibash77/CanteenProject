@@ -1,5 +1,7 @@
 package com.bibash.CanteenProject.web.user;
 
+import java.util.Date;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -73,5 +75,10 @@ public class UserController {
             return new RestResponseDto().successModel(userDto);
         }
        return new RestResponseDto().successModel("username or password invalid");
+    }
+
+    @GetMapping("/countUser")
+    public ResponseEntity<?> countUser(@RequestParam String startDate , @RequestParam String endDate) {
+        return new RestResponseDto().successModel(userService.countUser(new Date(startDate), new Date(endDate), Status.INACTIVE));
     }
 }

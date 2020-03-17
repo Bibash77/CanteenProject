@@ -1,5 +1,6 @@
 package com.bibash.CanteenProject.core.config;
 
+import java.util.Date;
 import javax.annotation.PostConstruct;
 
 import org.hibernate.usertype.UserType;

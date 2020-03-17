@@ -47,11 +47,11 @@ public class OrderSpec implements Specification<ItemOrder> {
             case FILTER_BY_DATE:
                 try {
                     Map dates = new ObjectMapper().readValue(value, Map.class);
-                    return criteriaBuilder.between(root.get("createdAt"),
+                    return criteriaBuilder.or(criteriaBuilder.between(root.get("createdAt"),
                         new SimpleDateFormat("MM/dd/yyyy")
                             .parse(String.valueOf(dates.get("startDate"))),
                         new SimpleDateFormat("MM/dd/yyyy")
-                            .parse(String.valueOf(dates.get("endDate"))));
+                            .parse(String.valueOf(dates.get("endDate")))));
                 } catch (JsonProcessingException | ParseException e) {
                     e.printStackTrace();
                 }

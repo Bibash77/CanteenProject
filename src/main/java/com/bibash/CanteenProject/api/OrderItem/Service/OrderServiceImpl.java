@@ -1,5 +1,8 @@
 package com.bibash.CanteenProject.api.OrderItem.Service;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -7,6 +10,7 @@ import java.util.Objects;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.transaction.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -76,27 +80,6 @@ public class OrderServiceImpl implements OrderService{
         final OrderSpecBuilder orderSpecBuilder = new OrderSpecBuilder(s);
         final Specification<ItemOrder> specification = orderSpecBuilder.build();
         return orderRepository.findAll(specification , pageable);
-/*        List<ItemOrder> itemOrders = new ArrayList<>();
-        entityManager = entityManager.getEntityManagerFactory().createEntityManager();
-
-        Session session = entityManager.unwrap(Session.class);
-        String queryString = "select i from  ItemOrder   i where i.orderStatus=:orderStatus";
-
-        if (searchObj.getId() != null) {
-            queryString += " and i.user.id=:userId";
-        }
-        if (searchObj.getCreatedAt() != null) {
-            queryString += " and i.getCreatedAt=:createdAt";
-        }
-        Query query = session.createQuery(queryString);
-        if(!ObjectUtils.isEmpty(searchObj.getOrderStatus())){
-            query.setParameter("orderStatus" , searchObj.getOrderStatus());
-        }
-        if(!ObjectUtils.isEmpty(searchObj.getId())){
-            query.setParameter("userId" , searchObj.getId());
-        }
-        itemOrders.addAll(query.list());
-        return itemOrders;*/
     }
 
     @Override
@@ -107,6 +90,11 @@ public class OrderServiceImpl implements OrderService{
             return  orderRepository.save(itemOrder);
         }
         return null;
+    }
+
+    @Override
+    public Map<String , Integer> orderCount(Date startDate , Date endDate) {
+       return  orderRepository.findSumOfOrder(startDate , endDate);
     }
 
     @Override

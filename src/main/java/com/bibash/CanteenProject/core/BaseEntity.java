@@ -1,15 +1,31 @@
 package com.bibash.CanteenProject.core;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
-public class BaseEntity {
-    @CreatedDate
-    @Column(name = "created_at", nullable = false, updatable = false)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+@MappedSuperclass
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public abstract class BaseEntity<PK extends Serializable> extends AbstractPersistable<Long> {
+
+    @Basic(optional = false)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt = new Date();
-
 }

@@ -13,6 +13,7 @@ import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.context.annotation.Lazy;
 
@@ -21,6 +22,7 @@ import org.springframework.context.annotation.Lazy;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name="user")
+@EqualsAndHashCode(callSuper = true)
 public class User extends BaseEntity {
 
     @Id
