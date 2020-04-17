@@ -74,7 +74,7 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public Page<ItemOrder> findBySearchObject(SearchDto searchObj , Pageable pageable) {
+    public Page<ItemOrder> findBySearchObject(Object searchObj , Pageable pageable) {
         Map<String, String> s = objectMapper.convertValue(searchObj, Map.class);
         s.values().removeIf(Objects::isNull);
         final OrderSpecBuilder orderSpecBuilder = new OrderSpecBuilder(s);

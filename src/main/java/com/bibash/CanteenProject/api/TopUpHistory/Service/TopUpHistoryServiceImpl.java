@@ -4,14 +4,22 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.bibash.CanteenProject.api.OrderItem.ItemOrder;
+import com.bibash.CanteenProject.api.OrderItem.repository.OrderSpecBuilder;
 import com.bibash.CanteenProject.api.TopUpHistory.TopUpHistory;
+import com.bibash.CanteenProject.api.TopUpHistory.TopUpHistorySpec;
+import com.bibash.CanteenProject.api.TopUpHistory.TopUpHistorySpecBuilder;
 import com.bibash.CanteenProject.api.TopUpHistory.repository.TopUpRepo;
 import com.bibash.CanteenProject.api.Wallet.Wallet;
+import com.bibash.CanteenProject.core.enums.TransactionType;
 
 @Service
 public class TopUpHistoryServiceImpl implements TopUpHistoryService{
@@ -52,6 +60,11 @@ public class TopUpHistoryServiceImpl implements TopUpHistoryService{
     public TopUpHistory saveHistoryFromWallet(Wallet wallet) {
         TopUpHistory topUpHistory = new TopUpHistory();
         topUpHistory.setCreatedAt(new Date());
+        if (wallet.getDepositAmount() > 0) {
+            topUpHistory.setTransactionType(TransactionType.TOPUP);
+        } else {
+            topUpHistory.setTransactionType(TransactionType.ORDER);
+        }
         topUpHistory.setTopUpAmount(wallet.getDepositAmount());
         topUpHistory.setUserId(wallet.getUser().getId());
         topUpHistory.setRemainingAmount(wallet.getWalletAmount());
@@ -64,7 +77,16 @@ public class TopUpHistoryServiceImpl implements TopUpHistoryService{
     }
 
     @Override
+    public Page<TopUpHistory> findBySearchObject(Object searchObj, Pageable pageable) {
+        Map<String, String> s = new ObjectMapper().convertValue(searchObj, Map.class);
+        s.values().removeIf(Objects::isNull);
+        final TopUpHistorySpecBuilder topUpHistorySpecBuilder = new TopUpHistorySpecBuilder(s);
+        final Specification<TopUpHistory> specification = topUpHistorySpecBuilder.build();
+        return topUpRepo.findAll(specification , pageable);
+    }
+
+    @Override
     public Map topUpCount(Date startDate, Date endDate, Long id) {
-        return topUpRepo.findSumOfOrder(startDate , endDate);
+        return topUpRepo.findSumOfOrder(startDate , endDate, TransactionType.TOPUP);
     }
 }

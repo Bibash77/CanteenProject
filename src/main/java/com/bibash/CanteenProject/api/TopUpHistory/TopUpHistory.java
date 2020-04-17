@@ -11,6 +11,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import com.bibash.CanteenProject.core.enums.TransactionType;
+
 @Data
 @Entity
 @NoArgsConstructor
@@ -21,6 +23,8 @@ public class TopUpHistory {
     private Long id;
 
     private double topUpAmount;
+
+    private TransactionType transactionType;
 
     private double remainingAmount;
 
