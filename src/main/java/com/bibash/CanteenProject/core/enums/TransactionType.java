@@ -2,7 +2,7 @@ package com.bibash.CanteenProject.core.enums;
 
 public enum  TransactionType {
 
-    ORDER("Order"), TOPUP("Top-Up");
+    ORDER("Order"), TOPUP("Top-Up") , CANCEL("cancel");
 
     private final String value;
 
