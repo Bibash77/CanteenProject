@@ -32,9 +32,9 @@ public class SocketController {
         if (message == null) {
             return new RestResponseDto().failureModel("Error saving message");
         }else {
-            if (message.getToId() != null && message.getToRole() != null) {
+            if (message.getToId() != null) {
                 simpMessagingTemplate.convertAndSend(
-                    SocketController.API + message.getToId() + "/" + message.getToRole(), message);
+                    SocketController.API + message.getToId() + "/", message);
                 return new RestResponseDto().successModel(service.save(message));
             } else {
                 logger.error("Error saving message {}", message);
