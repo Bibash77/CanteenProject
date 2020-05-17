@@ -9,16 +9,23 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.bibash.CanteenProject.api.User.Service.UserService;
+import com.bibash.CanteenProject.api.User.User;
 import com.bibash.CanteenProject.api.notification.Message;
 import com.bibash.CanteenProject.api.notification.repository.MessageRepository;
+import com.bibash.CanteenProject.core.enums.Status;
+import com.bibash.CanteenProject.core.enums.TransactionType;
 
 @Service
 public class MessageServiceImpl implements MessageService {
     private final MessageRepository messageRepository;
+    private final UserService userService;
 
     public MessageServiceImpl(
-        MessageRepository messageRepository) {
+        MessageRepository messageRepository,
+        UserService userService) {
         this.messageRepository = messageRepository;
+        this.userService = userService;
     }
 
     @Override
