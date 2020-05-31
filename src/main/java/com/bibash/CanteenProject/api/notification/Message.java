@@ -46,4 +46,12 @@ public class Message {
     private Double transactionAmount;
 
     private TransactionType transactionType;
+
+    private Boolean isSeen = false;
+
+    @Transient
+    private String orderCode;
+
+    @Transient
+    private String quantity;
 }

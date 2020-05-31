@@ -35,7 +35,7 @@ public class Wallet extends BaseEntity {
     @GeneratedValue
     private Long id;
 
-    @OneToOne
+    @OneToOne()
     private User user;
 
     private Double walletExpenditure;

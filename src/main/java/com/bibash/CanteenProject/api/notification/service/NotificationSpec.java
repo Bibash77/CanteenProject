@@ -8,12 +8,13 @@ import javax.persistence.criteria.Root;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.bibash.CanteenProject.api.notification.Message;
+import com.bibash.CanteenProject.core.enums.RoleType;
 import com.bibash.CanteenProject.core.enums.Status;
 
 public class NotificationSpec implements Specification<Message> {
 
     private static final String FILTER_BY_STATUS = "status";
-    private static final String FILTER_BY_USER_ID = "toId";
+    private static final String FILTER_BY_USER_ID = "fromId";
     private static final String FILTER_BY_USER_ROLE = "toRole";
 
     private final String property;
@@ -33,7 +34,7 @@ public class NotificationSpec implements Specification<Message> {
             case FILTER_BY_USER_ID:
                 return criteriaBuilder.equal(root.get(property), this.value);
             case FILTER_BY_USER_ROLE:
-                return criteriaBuilder.equal(root.get(property), this.value);
+                        return criteriaBuilder.equal(root.get(property), RoleType.valueOf(this.value));
             default:
                 return null;
         }

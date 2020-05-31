@@ -5,4 +5,6 @@ import com.bibash.CanteenProject.core.BaseService;
 
 public interface MessageService extends BaseService<Message> {
 
+    public String messageGenerator(Message message);
+
 }
