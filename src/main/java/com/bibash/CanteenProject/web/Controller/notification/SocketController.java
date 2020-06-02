@@ -43,8 +43,6 @@ public class SocketController {
                 message.setMessage(service.messageGenerator(message));
                 simpMessagingTemplate.convertAndSend(
                     SocketController.API+ "/" + message.getToRole(), message);
-                simpMessagingTemplate.convertAndSend(
-                    SocketController.API+ "/" + RoleType.KITCHENER, message);
                 return new RestResponseDto().successModel(service.save(message));
             } else {
                 logger.error("Error saving message {}", message);
