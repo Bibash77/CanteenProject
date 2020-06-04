@@ -55,4 +55,10 @@ public class RestResponseDto {
         r.setMessage("SUCCESS");
         return new ResponseEntity(r, HttpStatus.OK);
     }
+
+    public ResponseEntity failureModel(String message) {
+        RestResponseDto r = new RestResponseDto();
+        r.setMessage(message);
+        return new ResponseEntity(r, HttpStatus.BAD_REQUEST);
+    }
 }

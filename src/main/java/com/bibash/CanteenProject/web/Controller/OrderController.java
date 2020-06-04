@@ -40,7 +40,8 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<?> orderItem(@RequestBody OrderDto orderDto) {
-    return new RestResponseDto().successModel(orderService.save(orderDtoConverter.order(orderDto)));
+    orderService.save(orderDtoConverter.order(orderDto));
+    return new RestResponseDto().successModel(orderDtoConverter.order(orderDto));
     }
 
     @PostMapping("/changeStatus")

@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 
 import org.springframework.data.domain.Page;
@@ -15,7 +16,7 @@ import com.bibash.CanteenProject.api.User.repository.UserRepository;
 import com.bibash.CanteenProject.api.Wallet.WalletService.WalletService;
 import com.bibash.CanteenProject.core.enums.Status;
 
-@Service("userService")
+@Service()
 public class UserServiceImpl implements UserService{
     private final UserRepository userRepository;
     private final WalletService walletService;
@@ -84,5 +85,14 @@ public class UserServiceImpl implements UserService{
         Map<String , Long> map = new HashMap<>();
         map.put("user", userRepository.countByStatus(status));
         return map;
+    }
+
+    @Override
+    public User findById(Long userId) {
+        Optional<User> optionalUser = userRepository.findById(userId);
+        if(optionalUser.isPresent()){
+            return optionalUser.get();
+        }
+        return null;
     }
 }

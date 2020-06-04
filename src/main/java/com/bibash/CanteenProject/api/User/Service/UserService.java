@@ -16,4 +16,6 @@ public interface UserService  extends BaseService<User> {
     public User findUserByName(String userName);
 
     Map<String , Long> countUser(Date startDate, Date endDate, Status status);
+
+    public User findById(Long userId);
 }
