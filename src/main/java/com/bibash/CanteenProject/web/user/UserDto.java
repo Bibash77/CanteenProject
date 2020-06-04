@@ -24,4 +24,8 @@ public class UserDto {
     private String userCode;
 
     private String fullName;
+
+    private String email;
+
+    private String batch;
 }
