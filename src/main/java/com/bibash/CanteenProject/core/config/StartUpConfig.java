@@ -51,8 +51,10 @@ public class StartUpConfig {
             user.setWalletAmount(0.0);
             user.setRoleType(RoleType.ADMIN);
             user.setUserCode("123456");
+
             wallet.setUser(userRepository.save(user));
             wallet.setCreatedAt(new Date());
+            wallet.setWalletAmount(0.0);
             walletRepository.save(wallet);
         }
     }
