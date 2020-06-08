@@ -3,8 +3,9 @@
 ## default user
 
 
-default userName = spAdmin
-default password = admin1234
+Default userName = spAdmin
+
+Default password = admin1234
 
 ## basic setup
 
