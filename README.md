@@ -1,12 +1,12 @@
 # CanteenProject
 
-##default user
+## default user
 
 
 default userName = spAdmin
 default password = admin1234
 
-##basic feature
+## basic setup
 
 Register user account through startup panel;
 
