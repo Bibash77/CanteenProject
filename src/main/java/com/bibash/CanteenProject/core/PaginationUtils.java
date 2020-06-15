@@ -1,5 +1,7 @@
 package com.bibash.CanteenProject.core;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -23,5 +25,13 @@ public class PaginationUtils {
 
     public static Pageable pageable(int page, int size) {
         return PageRequest.of(page - 1, size);
+    }
+
+    public static Map<String, String> excludePageableProperties(Map<String, String> requestParam) {
+        final List<String> pageableProperties = Arrays.asList(PAGE, SIZE, SORT_BY, SORT_ORDER);
+
+        return requestParam.keySet().stream()
+            .filter(k -> !pageableProperties.contains(k))
+            .collect(Collectors.toMap(k -> k, requestParam::get));
     }
 }

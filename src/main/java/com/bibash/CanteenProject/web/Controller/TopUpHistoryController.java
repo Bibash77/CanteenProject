@@ -25,7 +25,7 @@ public class TopUpHistoryController {
     }
 
     @PostMapping("/search")
-    public ResponseEntity<?> saveWallet(@RequestBody Object searchDto, @RequestParam("page") int page, @RequestParam("size") int size){
+    public ResponseEntity<?> searchTopUpHistory(@RequestBody Object searchDto, @RequestParam("page") int page, @RequestParam("size") int size){
         return new RestResponseDto().successModel(topUpHistoryService.findBySearchObject(searchDto , PaginationUtils.pageable(page, size)));
     }
 }
