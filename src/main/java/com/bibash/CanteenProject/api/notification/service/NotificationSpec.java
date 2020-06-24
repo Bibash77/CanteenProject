@@ -14,7 +14,7 @@ import com.bibash.CanteenProject.core.enums.Status;
 public class NotificationSpec implements Specification<Message> {
 
     private static final String FILTER_BY_STATUS = "status";
-    private static final String FILTER_BY_USER_ID = "fromId";
+    private static final String FILTER_BY_TO_ID = "toId";
     private static final String FILTER_BY_USER_ROLE = "toRole";
 
     private final String property;
@@ -31,10 +31,10 @@ public class NotificationSpec implements Specification<Message> {
         switch (property) {
             case FILTER_BY_STATUS:
                 return criteriaBuilder.equal(root.get(property), Status.valueOf(value));
-            case FILTER_BY_USER_ID:
-                return criteriaBuilder.equal(root.get(property), this.value);
+            case FILTER_BY_TO_ID:
+                return criteriaBuilder.and(criteriaBuilder.equal(root.get(property), this.value));
             case FILTER_BY_USER_ROLE:
-                        return criteriaBuilder.equal(root.get(property), RoleType.valueOf(this.value));
+                        return criteriaBuilder.and(criteriaBuilder.equal(root.get(property), RoleType.valueOf(this.value)));
             default:
                 return null;
         }

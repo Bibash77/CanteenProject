@@ -1,16 +1,10 @@
 package com.bibash.CanteenProject.api.OrderItem.Service;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.criteria.CriteriaBuilder.In;
 import javax.transaction.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -24,7 +18,6 @@ import com.bibash.CanteenProject.api.OrderItem.ItemOrder;
 import com.bibash.CanteenProject.api.OrderItem.OrderDto;
 import com.bibash.CanteenProject.api.OrderItem.repository.OrderRepository;
 import com.bibash.CanteenProject.api.OrderItem.repository.OrderSpecBuilder;
-import com.bibash.CanteenProject.core.Dto.SearchDto;
 
 @Service
 @Transactional
@@ -45,7 +38,7 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     public ItemOrder findOne(Long id) {
-        return null;
+        return orderRepository.getOne(id);
     }
 
     @Override

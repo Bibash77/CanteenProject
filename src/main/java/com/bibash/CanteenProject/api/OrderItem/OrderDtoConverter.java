@@ -44,7 +44,8 @@ public class OrderDtoConverter {
         if(!ObjectUtils.isEmpty(orderDto.getUserId())/* && user.getStatus() != Status.INACTIVE*/) {
             Item currentItem = itemService.findOne(orderDto.getItem().getId());
             BeanUtils.copyProperties(orderDto, itemOrder);
-            itemOrder.setOrderCode(codeGeneratorUtils.genOrderCode());
+
+            itemOrder.setOrderCode(CodeGeneratorUtils.genOrderCode());
             itemOrder.setExpenditure(currentItem.getPrice() * orderDto.getQuantity());
             itemOrder.setItemName(orderDto.getItem().getItemName());
             itemOrder.setOrderStatus(OrderStatus.PENDING);

@@ -1,18 +1,23 @@
 package com.bibash.CanteenProject.core.enums;
 
-import java.util.Date;
-import java.util.Random;
+import java.security.SecureRandom;
+import java.time.LocalDate;
 
 import org.springframework.stereotype.Component;
 
 @Component
 public class CodeGeneratorUtils {
+    private static final String NUMBER_SEED = "0123456789";
+    private static final String COMBO_SEED = "ABCDEFGHIJKLMNOPQRSTUVWXY";
+    private static SecureRandom random = new SecureRandom();
 
-    public String genOrderCode(){
-        Date date = new Date();
-        String abc = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        char letter = abc.charAt(new Random().nextInt(abc.length()));
-        String code = date.getDate() + String.valueOf(new Date().getSeconds()) + date.getMonth() + date.getDay();
-        return code;
+    public static String genOrderCode(){
+        int length = 3;
+        StringBuilder sb = new StringBuilder(length);
+        for (int i = 0; i < length; i++) {
+            sb.append(COMBO_SEED.charAt(random.nextInt(COMBO_SEED.length())));
+        }
+        sb.append(LocalDate.now().getDayOfYear() + random.nextInt(500));
+        return sb.toString();
     }
 }
