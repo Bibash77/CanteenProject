@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import com.bibash.CanteenProject.api.User.Service.UserService;
 import com.bibash.CanteenProject.api.User.User;
-import com.bibash.CanteenProject.api.User.repository.UserRepository;
 import com.bibash.CanteenProject.api.Wallet.WalletService.WalletService;
 import com.bibash.CanteenProject.api.notification.Message;
 import com.bibash.CanteenProject.api.notification.repository.MessageRepository;
@@ -67,12 +66,15 @@ public class MessageServiceImpl implements MessageService {
         User user = userService.findById(message.getFromId());
         message.setStatus(Status.ACTIVE);
 
-        switch (message.getTransactionType()){
-            case ORDER:
+        switch (message.getActionType()){
+            case "ORDER":
                 return "Order Code:"+message.getOrderCode()+". "+user.getUserName() + " has ordered "+ message.getQuantity()+ " unit " + message.getItemName() +". Rs "+ message.getTransactionAmount() +" is deducted.";
-            case TOPUP:
-                return "Admin has TopUp Rs. "+message.getTransactionAmount() +"in " + user.getUserName() + " Account";
-            case CANCEL:
+            case "TOP-UP":
+                return "Admin has TopUp Rs. "+message.getTransactionAmount() +" in " + user.getUserName() + " Account";
+            case "DELIVERED":
+            case  "READY":
+                return "Order Code:"+message.getOrderCode()+" .Your Order of "+ message.getQuantity() + " Unit " + message.getItemName() + " is "+ message.getActionType() + " now";
+            case "CANCEL":
                 if (message.getItemName() == null) {
                     return
                         " Rs." + message.getTransactionAmount() + " is added in" + user

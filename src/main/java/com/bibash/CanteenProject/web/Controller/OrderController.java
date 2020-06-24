@@ -1,9 +1,6 @@
 package com.bibash.CanteenProject.web.Controller;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -40,8 +37,9 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<?> orderItem(@RequestBody OrderDto orderDto) {
-    orderService.save(orderDtoConverter.order(orderDto));
-    return new RestResponseDto().successModel(orderDtoConverter.order(orderDto));
+     ItemOrder responseDto = orderDtoConverter.order(orderDto);
+     orderService.save(responseDto);
+    return new RestResponseDto().successModel(responseDto);
     }
 
     @PostMapping("/changeStatus")

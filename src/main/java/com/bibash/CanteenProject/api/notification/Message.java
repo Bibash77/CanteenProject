@@ -7,7 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.transaction.Transaction;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,7 +15,6 @@ import lombok.NoArgsConstructor;
 
 import com.bibash.CanteenProject.core.enums.RoleType;
 import com.bibash.CanteenProject.core.enums.Status;
-import com.bibash.CanteenProject.core.enums.TransactionType;
 
 
 @Data
@@ -45,7 +43,7 @@ public class Message {
     @Transient
     private Double transactionAmount;
 
-    private TransactionType transactionType;
+    private String actionType;
 
     private Boolean isSeen = false;
 

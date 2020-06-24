@@ -1,7 +1,7 @@
 package com.bibash.CanteenProject.core.enums;
 
 /**
- * @author Elvin Shrestha on 3/9/2020
+ * @author Bibash Bogati on 3/9/2020
  */
 public class AppConstant {
 
