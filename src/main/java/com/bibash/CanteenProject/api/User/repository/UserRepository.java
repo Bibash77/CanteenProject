@@ -13,9 +13,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User findUserByUserName(String userName);
 
+
     Long countByStatus(Status status);
 
-    /*@Query("select COUNT(*) from User u where u.status= :status")
-    Map<String , Integer> countUsers(Status status);*/
+    @Query("select COUNT(u) as user from User u where u.status= :status")
+    Map<String , Long> countUsers(Status status);
 
 }
