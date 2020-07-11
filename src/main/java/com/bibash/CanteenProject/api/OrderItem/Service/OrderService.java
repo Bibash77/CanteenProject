@@ -14,15 +14,17 @@ import com.bibash.CanteenProject.core.Dto.SearchDto;
 
 public interface OrderService extends BaseService<ItemOrder> {
 
-    public Page<ItemOrder> findAllPageableById(Long id , Pageable pageable);
+     Page<ItemOrder> findAllPageableById(Long id , Pageable pageable);
 
-    public List<ItemOrder> findAllById(Long id);
+    public ItemOrder orderItem(OrderDto orderDto);
+
+     List<ItemOrder> findAllById(Long id);
 
     Page<ItemOrder> findBySearchObject(Object searchObj , Pageable pageable);
 
-    ItemOrder orderAction(OrderDto orderDto);
+    ItemOrder orderServingAction(OrderDto orderDto);
 
     Map<String, Integer> orderCount(Date startDate , Date endDate);
 
-      public BaseSpecBuilder<ItemOrder> getSpec(Map<String, String> filterParams);
+    BaseSpecBuilder<ItemOrder> getSpec(Map<String, String> filterParams);
 }

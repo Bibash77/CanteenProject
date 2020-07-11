@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public String userCodeGenerateor() {
-        String userCode = String.valueOf(new Random().nextInt(1000)).concat(String.valueOf(new Date().getDate()) + String.valueOf(new Date().getSeconds()));
+        String userCode = String.valueOf(new Random().nextInt(1000)).concat(new Date().getDate() + String.valueOf(new Date().getSeconds()));
         return userCode;
     }
 
@@ -82,17 +82,12 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Map<String , Long> countUser(Date startDate, Date endDate, Status status) {
-        Map<String , Long> map = new HashMap<>();
-        map.put("user", userRepository.countByStatus(status));
-        return map;
+        return userRepository.countUsers(status);
     }
 
     @Override
     public User findById(Long userId) {
         Optional<User> optionalUser = userRepository.findById(userId);
-        if(optionalUser.isPresent()){
-            return optionalUser.get();
-        }
-        return null;
+        return optionalUser.orElse(null);
     }
 }

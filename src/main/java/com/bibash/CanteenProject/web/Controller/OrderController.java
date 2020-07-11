@@ -37,14 +37,17 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<?> orderItem(@RequestBody OrderDto orderDto) {
-     ItemOrder responseDto = orderDtoConverter.order(orderDto);
+     ItemOrder responseDto = orderService.orderItem(orderDto);
+     if(responseDto == null){
+         return new RestResponseDto().failureModel("Sorry your order is Invalid.");
+     }
      orderService.save(responseDto);
     return new RestResponseDto().successModel(responseDto);
     }
 
     @PostMapping("/changeStatus")
     public ResponseEntity<?> orderAction(@RequestBody OrderDto orderDto) {
-        return new RestResponseDto().successModel(orderService.orderAction(orderDto));
+        return new RestResponseDto().successModel(orderService.orderServingAction(orderDto));
     }
 
     @GetMapping("/pageable/{id}")

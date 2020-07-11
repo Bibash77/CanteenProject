@@ -9,8 +9,12 @@ import com.bibash.CanteenProject.core.BaseService;
 
 public interface WalletService extends BaseService<Wallet> {
 
-    public Wallet topUp(Wallet wallet);
+     Wallet topUp(Wallet wallet);
 
     public Map topUpCount(Date startDate, Date endDate, Long id);
+
+    Wallet deductAmountFromAccount(Long id , double deductAmount);
+
+    Wallet getWalletByUser(Long id);
 
 }

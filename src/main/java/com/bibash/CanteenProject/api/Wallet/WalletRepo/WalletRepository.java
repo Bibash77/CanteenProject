@@ -15,4 +15,6 @@ public interface WalletRepository extends JpaRepository<Wallet , Long>,
 
     @Query("select  sum(w.walletExpenditure) as walletExpenditure from Wallet w where w.createdAt > :startDate AND w.createdAt < :endDate")
     Map<String , Integer> findSumOfOrder(Date startDate , Date endDate);
+
+    Wallet findByUserId(Long id);
 }

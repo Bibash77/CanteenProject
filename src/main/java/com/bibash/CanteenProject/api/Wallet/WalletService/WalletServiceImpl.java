@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import com.bibash.CanteenProject.api.OrderItem.ItemOrder;
 import com.bibash.CanteenProject.api.OrderItem.repository.OrderSpecBuilder;
 import com.bibash.CanteenProject.api.TopUpHistory.Service.TopUpHistoryService;
+import com.bibash.CanteenProject.api.User.User;
 import com.bibash.CanteenProject.api.Wallet.Wallet;
 import com.bibash.CanteenProject.api.Wallet.WalletRepo.WalletRepository;
 import com.bibash.CanteenProject.api.Wallet.WalletRepo.WalletSpecBuilder;
@@ -77,5 +78,20 @@ public class WalletServiceImpl implements WalletService{
     @Override
     public Map topUpCount(Date startDate, Date endDate, Long id) {
         return walletRepository.findSumOfOrder(startDate , endDate);
+    }
+
+    @Override
+    public Wallet deductAmountFromAccount(Long id, double deductAmount) {
+        Wallet wallet = new Wallet();
+        User user = new User();
+        user.setId(id);
+        wallet.setUser(user);
+        wallet.setDepositAmount(-deductAmount);
+        return this.topUp(wallet);
+    }
+
+    @Override
+    public Wallet getWalletByUser(Long id) {
+        return walletRepository.findByUserId(id);
     }
 }

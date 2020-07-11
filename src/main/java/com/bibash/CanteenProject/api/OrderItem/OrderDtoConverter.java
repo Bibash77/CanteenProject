@@ -52,18 +52,7 @@ public class OrderDtoConverter {
             itemOrder.getUser().setId(orderDto.getUserId());
             itemOrder.setCreatedAt(new Date());
         }
-        Wallet wallet = deduct(orderDto.getUserId() , itemOrder.getExpenditure());
+        Wallet wallet = walletService.deductAmountFromAccount(orderDto.getUserId() , itemOrder.getExpenditure());
         return itemOrder;
     }
-
-    private Wallet deduct(Long id , double deductAmount){
-        Wallet wallet = new Wallet();
-        User user = new User();
-        user.setId(id);
-        wallet.setUser(user);
-        wallet.setDepositAmount(-deductAmount);
-        return walletService.topUp(wallet);
-
-    }
-
 }
