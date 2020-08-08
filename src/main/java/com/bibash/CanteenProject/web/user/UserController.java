@@ -39,6 +39,11 @@ public class UserController {
         this.walletService = walletService;
     }
 
+    @GetMapping("/authenticated")
+    public ResponseEntity<?> getAuthenticated() {
+        return new RestResponseDto().successModel(userService.getAuthenticated());
+    }
+
     @PostMapping
     public ResponseEntity<?> saveUser(@RequestBody User user) {
         return new RestResponseDto().successModel(userService.save(user));

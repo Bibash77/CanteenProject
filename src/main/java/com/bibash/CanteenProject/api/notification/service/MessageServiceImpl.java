@@ -68,9 +68,9 @@ public class MessageServiceImpl implements MessageService {
 
         switch (message.getActionType()){
             case "ORDER":
-                return "Order Code:"+message.getOrderCode()+". "+user.getUserName() + " has ordered "+ message.getQuantity()+ " unit " + message.getItemName() +". Rs "+ message.getTransactionAmount() +" is deducted.";
+                return "Order Code:"+message.getOrderCode()+". "+user.getUsername() + " has ordered "+ message.getQuantity()+ " unit " + message.getItemName() +". Rs "+ message.getTransactionAmount() +" is deducted.";
             case "TOP-UP":
-                return "Admin has TopUp Rs. "+message.getTransactionAmount() +" in " + user.getUserName() + " Account";
+                return "Admin has TopUp Rs. "+message.getTransactionAmount() +" in " + user.getUsername() + " Account";
             case "DELIVERED":
             case  "READY":
                 return "Order Code:"+message.getOrderCode()+" .Your Order of "+ message.getQuantity() + " Unit " + message.getItemName() + " is "+ message.getActionType() + " now";
@@ -78,10 +78,10 @@ public class MessageServiceImpl implements MessageService {
                 if (message.getItemName() == null) {
                     return
                         " Rs." + message.getTransactionAmount() + " is added in" + user
-                            .getUserName() + " account by Admin";
+                            .getUsername() + " account by Admin";
                 } else {
                     return
-                        user.getUserName() + " has cancel order of " + message.getItemName() + ". Rs"
+                        user.getUsername() + " has cancel order of " + message.getItemName() + ". Rs"
                             + message.getTransactionAmount() + " is added in account.";
                 }
         }

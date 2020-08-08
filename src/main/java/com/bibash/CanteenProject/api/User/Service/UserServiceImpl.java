@@ -9,6 +9,11 @@ import java.util.Random;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.bibash.CanteenProject.api.User.User;
@@ -16,8 +21,8 @@ import com.bibash.CanteenProject.api.User.repository.UserRepository;
 import com.bibash.CanteenProject.api.Wallet.WalletService.WalletService;
 import com.bibash.CanteenProject.core.enums.Status;
 
-@Service()
-public class UserServiceImpl implements UserService{
+@Service("userDetailService")
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final WalletService walletService;
 
@@ -89,5 +94,22 @@ public class UserServiceImpl implements UserService{
     public User findById(Long userId) {
         Optional<User> optionalUser = userRepository.findById(userId);
         return optionalUser.orElse(null);
+    }
+
+    @Override
+    public User getAuthenticated() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(authentication.getPrincipal() instanceof UserDetails){
+            User user = (User) authentication.getPrincipal();
+            user = this.findUserByName(user.getUsername());
+            return user;
+        } else {
+            throw new UsernameNotFoundException("User is not Authenticated; Found type: " + authentication.getPrincipal().getClass());
+        }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findUserByUserName(username);
     }
 }

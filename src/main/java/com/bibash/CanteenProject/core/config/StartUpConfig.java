@@ -44,7 +44,7 @@ public class StartUpConfig {
             final Wallet wallet = new Wallet();
             user.setFullName(AppConstant.DEFAULT_SUPER_ADMIN_NAME);
             user.setUserName(AppConstant.DEFAULT_SUPER_ADMIN_USERNAME);
-            user.setPassword(AppConstant.DEFAULT_SUPER_ADMIN_PASSWORD);
+            user.setPassword(passwordEncoder.encode(AppConstant.DEFAULT_SUPER_ADMIN_PASSWORD));
             user.setStatus(Status.ACTIVE);
             user.setBatch(String.valueOf(LocalDate.now().getYear()));
             user.setEmail("demo@gmail.com");
@@ -59,4 +59,7 @@ public class StartUpConfig {
         }
     }
 
+    public static void main(String[] args) {
+        System.out.println();
+    }
 }
