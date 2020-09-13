@@ -27,6 +27,7 @@ import com.bibash.CanteenProject.api.User.User;
 import com.bibash.CanteenProject.api.Wallet.Wallet;
 import com.bibash.CanteenProject.api.Wallet.WalletService.WalletService;
 import com.bibash.CanteenProject.core.Dto.RestResponseDto;
+import com.bibash.CanteenProject.core.config.exception.CustomException;
 import com.bibash.CanteenProject.core.enums.AppConstant;
 import com.bibash.CanteenProject.core.enums.CodeGeneratorUtils;
 import com.bibash.CanteenProject.core.enums.OrderStatus;
@@ -101,7 +102,7 @@ public class OrderServiceImpl implements OrderService{
             walletService.deductAmountFromAccount(orderDto.getUserId() , itemOrder.getExpenditure());
             return itemOrder;
         } else {
-            return null;
+                throw new CustomException("You do not have enough balance to make this order !!");
         }
     }
 
@@ -126,7 +127,8 @@ public class OrderServiceImpl implements OrderService{
             itemOrder.setOrderStatus(orderDto.getOrderStatus());
             return  orderRepository.save(itemOrder);
         }
-        return null;
+        else
+       throw new CustomException("Unable to save your action");
     }
 
     @Override
@@ -143,6 +145,6 @@ public class OrderServiceImpl implements OrderService{
         if (userBalance >= itemPrice){
             return AppConstant.ORDER_ELIGIBLE;
         }
-        return "";
+       throw new CustomException("your balance Rs." + userBalance + " is not sufficient to make this order");
     }
 }

@@ -24,7 +24,7 @@ public class DateUtils {
 
     public String transactionMessage(Wallet wallet, TransactionType transactionType){
         if(transactionType.equals(TransactionType.TOPUP)){
-            return wallet.getDepositAmount().toString() + " has been Top-Up on" + " " + wallet.getUser().getUserName() + " Acoount";
+            return wallet.getDepositAmount().toString() + " has been Top-Up on" + " " + wallet.getUser().getUsername() + " Acoount";
         }else {
      /*       return wallet.getUser().getUsername() + " ordered" + " " + itemName + "." + amount.toString() +  "has been detucted.";
       */ return "no messaage";  }

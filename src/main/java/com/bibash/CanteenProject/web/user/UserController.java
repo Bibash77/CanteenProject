@@ -19,6 +19,7 @@ import com.bibash.CanteenProject.api.User.User;
 import com.bibash.CanteenProject.api.Wallet.Wallet;
 import com.bibash.CanteenProject.api.Wallet.WalletService.WalletService;
 import com.bibash.CanteenProject.core.Dto.RestResponseDto;
+import com.bibash.CanteenProject.core.enums.RoleType;
 import com.bibash.CanteenProject.core.enums.Status;
 import com.bibash.CanteenProject.web.LoginService;
 
@@ -39,6 +40,11 @@ public class UserController {
         this.walletService = walletService;
     }
 
+    @GetMapping("/authenticated")
+    public ResponseEntity<?> getAuthenticated() {
+        return new RestResponseDto().successModel(userService.getAuthenticated());
+    }
+
     @PostMapping
     public ResponseEntity<?> saveUser(@RequestBody User user) {
         return new RestResponseDto().successModel(userService.save(user));
@@ -57,6 +63,7 @@ public class UserController {
     @PostMapping(value = "/register")
     public ResponseEntity<?> registerUser(@RequestBody User user) {
         user.setStatus(Status.INACTIVE);
+        user.setRoleType(RoleType.STUDENT);
         Wallet wallet = new Wallet();
         wallet.setUser(userService.save(user));
         walletService.save(wallet);
