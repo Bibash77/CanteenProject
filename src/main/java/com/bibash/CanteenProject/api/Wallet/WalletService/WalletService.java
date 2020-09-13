@@ -17,4 +17,5 @@ public interface WalletService extends BaseService<Wallet> {
 
     Wallet getWalletByUser(Long id);
 
+
 }

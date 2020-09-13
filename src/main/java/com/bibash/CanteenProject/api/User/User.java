@@ -46,6 +46,9 @@ public class User extends BaseEntity<Long> implements UserDetails , Serializable
     @Column(nullable = false)
     private String password;
 
+
+    private String number;
+
     private String Batch;
 
     @Column(nullable = false)

@@ -18,6 +18,7 @@ import com.bibash.CanteenProject.api.User.User;
 import com.bibash.CanteenProject.api.Wallet.Wallet;
 import com.bibash.CanteenProject.api.Wallet.WalletRepo.WalletRepository;
 import com.bibash.CanteenProject.api.Wallet.WalletRepo.WalletSpecBuilder;
+import com.bibash.CanteenProject.core.config.exception.CustomException;
 
 @Service("walletService")
 public class WalletServiceImpl implements WalletService{
@@ -59,11 +60,12 @@ public class WalletServiceImpl implements WalletService{
 
     @Override
     public Wallet save(Wallet wallet) {
-        if(wallet.getId() == null) {
-            wallet.setWalletExpenditure(0.0);
-            wallet.setWalletAmount(0.0);
-        }
-        return walletRepository.save(wallet);
+            if (wallet.getId() == null) {
+                wallet.setWalletExpenditure(0.0);
+                wallet.setWalletAmount(0.0);
+            }
+            return walletRepository.save(wallet);
+
     }
 
     @Override

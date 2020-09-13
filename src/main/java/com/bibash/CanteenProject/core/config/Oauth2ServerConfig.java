@@ -1,5 +1,6 @@
 package com.bibash.CanteenProject.core.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -74,6 +75,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         return tokenServices;
     }
 
+    @Bean
     public TokenStore tokenStore(){
             return new InMemoryTokenStore();
     }

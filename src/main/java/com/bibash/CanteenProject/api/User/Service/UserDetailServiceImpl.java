@@ -7,6 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 import com.bibash.CanteenProject.api.User.repository.UserRepository;
+import com.bibash.CanteenProject.core.config.exception.CustomException;
 
 @Component
 public class UserDetailServiceImpl implements UserDetailsService {
@@ -16,6 +17,10 @@ public class UserDetailServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findUserByUserName(username);
+        try {
+           return userRepository.findUserByUserName(username);
+        }catch (Exception ex){
+            throw new CustomException(ex.getMessage());
+        }
     }
 }

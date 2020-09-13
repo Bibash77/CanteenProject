@@ -1,7 +1,6 @@
 package com.bibash.CanteenProject.api.User.Service;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -12,24 +11,29 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.bibash.CanteenProject.api.User.User;
 import com.bibash.CanteenProject.api.User.repository.UserRepository;
+import com.bibash.CanteenProject.api.Wallet.Wallet;
 import com.bibash.CanteenProject.api.Wallet.WalletService.WalletService;
+import com.bibash.CanteenProject.core.config.exception.CustomException;
 import com.bibash.CanteenProject.core.enums.Status;
 
 @Service("userDetailService")
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final WalletService walletService;
+    private final PasswordEncoder passwordEncoder;
 
     public UserServiceImpl(UserRepository userRepository,
-        WalletService walletService){
+        WalletService walletService,
+        PasswordEncoder passwordEncoder){
         this.userRepository= userRepository;
         this.walletService = walletService;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -46,13 +50,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) {
-        if(user.getId() == null){
-            user.setWalletAmount(0.0);
-            user.setUserCode(userCodeGenerateor());
-            user.setStatus(Status.INACTIVE);
+        try {
+            if (user.getId() == null) {
+                user.setWalletAmount(0.0);
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
+                user.setUserCode(userCodeGenerateor());
+                user.setStatus(Status.INACTIVE);
+            }
+            return userRepository.save(user);
+        } catch (Exception e) {
+            throw new CustomException(
+                "User with username" + user.getUsername() + " already exist!!!");
         }
-
-        return userRepository.save(user);
     }
 
     @Override
@@ -102,6 +111,8 @@ public class UserServiceImpl implements UserService {
         if(authentication.getPrincipal() instanceof UserDetails){
             User user = (User) authentication.getPrincipal();
             user = this.findUserByName(user.getUsername());
+            Wallet wallet = walletService.getWalletByUser(user.getId());
+            user.setWalletAmount(wallet.getWalletAmount());
             return user;
         } else {
             throw new UsernameNotFoundException("User is not Authenticated; Found type: " + authentication.getPrincipal().getClass());

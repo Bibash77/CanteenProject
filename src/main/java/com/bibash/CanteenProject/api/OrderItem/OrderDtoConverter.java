@@ -47,6 +47,7 @@ public class OrderDtoConverter {
 
             itemOrder.setOrderCode(CodeGeneratorUtils.genOrderCode());
             itemOrder.setExpenditure(currentItem.getPrice() * orderDto.getQuantity());
+            itemOrder.setItemPrice(currentItem.getPrice());
             itemOrder.setItemName(orderDto.getItem().getItemName());
             itemOrder.setOrderStatus(OrderStatus.PENDING);
             itemOrder.getUser().setId(orderDto.getUserId());

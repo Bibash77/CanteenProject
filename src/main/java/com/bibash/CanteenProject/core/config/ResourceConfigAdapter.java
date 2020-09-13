@@ -1,6 +1,7 @@
 package com.bibash.CanteenProject.core.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
@@ -21,6 +22,7 @@ public class ResourceConfigAdapter extends ResourceServerConfigurerAdapter {
        http.authorizeRequests()
            .antMatchers("/oauth/token")
            .permitAll()
+           .antMatchers(HttpMethod.POST ,"/v1/user/register").permitAll()
            .antMatchers("/v1/**")
            .authenticated()
            .and()

@@ -44,6 +44,8 @@ public class ItemOrder {
 
     private String itemName;
 
+    private Double itemPrice;
+
     private String orderCode;
 
     private Double expenditure;
