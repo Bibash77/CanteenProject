@@ -49,7 +49,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         clients.inMemory()
             .withClient(AppConstant.CLIENT)
             .secret(passwordEncoder.encode(AppConstant.Password))
-            .authorizedGrantTypes("authorization_code", "refresh_token", "password",
+            .authorizedGrantTypes( "refresh_token", "password",
                 "client_credentials")
             .scopes("read", "write", "trust")
             .redirectUris("/error")
