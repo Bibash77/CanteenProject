@@ -60,7 +60,7 @@ public class UserServiceImpl implements UserService {
             return userRepository.save(user);
         } catch (Exception e) {
             throw new CustomException(
-                "User with username" + user.getUsername() + " already exist!!!");
+                "User with username: " + user.getUsername() + " already exist!!!");
         }
     }
 
