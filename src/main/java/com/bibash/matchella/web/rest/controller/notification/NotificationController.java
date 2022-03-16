@@ -1,4 +1,4 @@
-package com.bibash.matchella.web.rest.Controller.notification;
+package com.bibash.matchella.web.rest.controller.notification;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

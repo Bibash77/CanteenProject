@@ -1,4 +1,4 @@
-package com.bibash.matchella.web.rest.Controller;
+package com.bibash.matchella.web.rest.controller;
 
 import java.util.Date;
 

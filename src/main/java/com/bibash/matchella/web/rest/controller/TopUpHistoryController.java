@@ -1,4 +1,4 @@
-package com.bibash.matchella.web.rest.Controller;
+package com.bibash.matchella.web.rest.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

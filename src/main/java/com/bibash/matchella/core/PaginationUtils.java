@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import lombok.experimental.UtilityClass;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Pageable;
  * @author Bibash Bogati on 2/18/2019
  */
 
+@UtilityClass
 public class PaginationUtils {
 
     public static final int DEFAULT_PAGE = 1;
