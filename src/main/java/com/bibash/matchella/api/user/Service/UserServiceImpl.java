@@ -1,4 +1,4 @@
-package com.bibash.matchella.api.User.Service;
+package com.bibash.matchella.api.user.Service;
 
 import java.util.Date;
 import java.util.List;
@@ -15,8 +15,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.bibash.matchella.api.User.User;
-import com.bibash.matchella.api.User.repository.UserRepository;
+import com.bibash.matchella.api.user.User;
+import com.bibash.matchella.api.user.repository.UserRepository;
 import com.bibash.matchella.api.Wallet.Wallet;
 import com.bibash.matchella.api.Wallet.WalletService.WalletService;
 import com.bibash.matchella.core.config.exception.CustomException;

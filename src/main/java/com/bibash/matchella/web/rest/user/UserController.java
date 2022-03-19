@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bibash.matchella.api.User.Service.UserService;
-import com.bibash.matchella.api.User.User;
+import com.bibash.matchella.api.user.Service.UserService;
+import com.bibash.matchella.api.user.User;
 import com.bibash.matchella.api.Wallet.Wallet;
 import com.bibash.matchella.api.Wallet.WalletService.WalletService;
 import com.bibash.matchella.core.dto.RestResponseDto;

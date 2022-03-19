@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.ObjectUtils;
 
-import com.bibash.matchella.api.User.Service.UserService;
-import com.bibash.matchella.api.User.User;
+import com.bibash.matchella.api.user.Service.UserService;
+import com.bibash.matchella.api.user.User;
 import com.bibash.matchella.api.Wallet.Wallet;
 import com.bibash.matchella.api.Wallet.WalletRepo.WalletRepository;
 import com.bibash.matchella.web.rest.user.LoginDto;

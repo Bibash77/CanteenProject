@@ -1,4 +1,4 @@
-package com.bibash.matchella.api.User.repository;
+package com.bibash.matchella.api.user.repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -7,7 +7,7 @@ import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import com.bibash.matchella.api.User.User;
+import com.bibash.matchella.api.user.User;
 
 public class UserSpec implements Specification<User> {
 

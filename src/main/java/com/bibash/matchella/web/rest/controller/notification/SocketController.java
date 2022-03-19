@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bibash.matchella.api.OrderItem.Service.OrderService;
-import com.bibash.matchella.api.User.Service.UserService;
+import com.bibash.matchella.api.user.Service.UserService;
 import com.bibash.matchella.api.notification.Message;
 import com.bibash.matchella.api.notification.service.MessageService;
 import com.bibash.matchella.core.dto.RestResponseDto;

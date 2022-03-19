@@ -1,6 +1,6 @@
 package com.bibash.matchella.core.dto;
 
-import com.bibash.matchella.api.User.User;
+import com.bibash.matchella.api.user.User;
 import com.bibash.matchella.core.constants.Constants;
 
 import javax.validation.constraints.Email;

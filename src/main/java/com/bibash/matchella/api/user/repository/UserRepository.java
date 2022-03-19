@@ -1,11 +1,11 @@
-package com.bibash.matchella.api.User.repository;
+package com.bibash.matchella.api.user.repository;
 
 import java.util.Map;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.bibash.matchella.api.User.User;
+import com.bibash.matchella.api.user.User;
 import com.bibash.matchella.core.enums.Status;
 
 public interface UserRepository extends JpaRepository<User, Long> {

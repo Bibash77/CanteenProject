@@ -1,10 +1,10 @@
-package com.bibash.matchella.api.User.repository;
+package com.bibash.matchella.api.user.repository;
 
 import java.util.Map;
 
 import org.springframework.data.jpa.domain.Specification;
 
-import com.bibash.matchella.api.User.User;
+import com.bibash.matchella.api.user.User;
 import com.bibash.matchella.core.BaseSpecBuilder;
 
 public class UserSpecBuilder extends BaseSpecBuilder<User> {

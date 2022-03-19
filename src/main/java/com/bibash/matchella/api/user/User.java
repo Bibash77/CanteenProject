@@ -1,12 +1,11 @@
-package com.bibash.matchella.api.User;
+package com.bibash.matchella.api.user;
 
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.Collection;
-import java.util.List;
 
-import com.bibash.matchella.api.OrderItem.ItemOrder;
 import com.bibash.matchella.core.BaseEntity;
+import com.bibash.matchella.core.component.TextEncryptorConverter;
 import com.bibash.matchella.core.constants.Constants;
 import com.bibash.matchella.core.enums.RoleType;
 import com.bibash.matchella.core.enums.Status;
@@ -78,16 +77,14 @@ public class User extends BaseEntity<Long> implements UserDetails , Serializable
 
     private String number;
 
-    private String Batch;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true, updatable = false)
+    @Convert(converter = TextEncryptorConverter.class)
     private String email;
 
     @Enumerated(EnumType.ORDINAL)
     private Status status;
 
-    @OneToMany
-    private List<ItemOrder> itemOrder;
 
     @Column
     private Double walletAmount;

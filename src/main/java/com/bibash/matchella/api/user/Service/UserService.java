@@ -1,11 +1,11 @@
-package com.bibash.matchella.api.User.Service;
+package com.bibash.matchella.api.user.Service;
 
 import java.util.Date;
 import java.util.Map;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import com.bibash.matchella.api.User.User;
+import com.bibash.matchella.api.user.User;
 import com.bibash.matchella.core.BaseService;
 import com.bibash.matchella.core.enums.Status;
 

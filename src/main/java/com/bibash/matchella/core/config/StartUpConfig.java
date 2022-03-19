@@ -7,8 +7,8 @@ import javax.annotation.PostConstruct;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import com.bibash.matchella.api.User.User;
-import com.bibash.matchella.api.User.repository.UserRepository;
+import com.bibash.matchella.api.user.User;
+import com.bibash.matchella.api.user.repository.UserRepository;
 import com.bibash.matchella.api.Wallet.Wallet;
 import com.bibash.matchella.api.Wallet.WalletRepo.WalletRepository;
 import com.bibash.matchella.core.enums.AppConstant;

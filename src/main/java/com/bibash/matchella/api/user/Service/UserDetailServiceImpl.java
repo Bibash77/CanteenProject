@@ -1,4 +1,4 @@
-package com.bibash.matchella.api.User.Service;
+package com.bibash.matchella.api.user.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
-import com.bibash.matchella.api.User.repository.UserRepository;
+import com.bibash.matchella.api.user.repository.UserRepository;
 import com.bibash.matchella.core.config.exception.CustomException;
 
 @Component

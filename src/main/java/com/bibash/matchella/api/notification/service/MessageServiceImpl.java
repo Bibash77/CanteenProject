@@ -10,8 +10,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.bibash.matchella.api.User.Service.UserService;
-import com.bibash.matchella.api.User.User;
+import com.bibash.matchella.api.user.Service.UserService;
+import com.bibash.matchella.api.user.User;
 import com.bibash.matchella.api.Wallet.WalletService.WalletService;
 import com.bibash.matchella.api.notification.Message;
 import com.bibash.matchella.api.notification.repository.MessageRepository;
