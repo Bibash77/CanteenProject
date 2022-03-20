@@ -1,4 +1,4 @@
-package com.bibash.matchella.web.rest.user;
+package com.bibash.matchella.api.dto;
 
 import lombok.Data;
 

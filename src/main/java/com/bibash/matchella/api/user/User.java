@@ -86,9 +86,6 @@ public class User extends BaseEntity<Long> implements UserDetails , Serializable
     private Status status;
 
 
-    @Column
-    private Double walletAmount;
-
     @NotBlank
     @Pattern(regexp = Constants.LOGIN_REGEX)
     @Size(min = 1, max = 50)

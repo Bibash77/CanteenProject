@@ -9,8 +9,8 @@ import com.bibash.matchella.api.user.Service.UserService;
 import com.bibash.matchella.api.user.User;
 import com.bibash.matchella.api.Wallet.Wallet;
 import com.bibash.matchella.api.Wallet.WalletRepo.WalletRepository;
-import com.bibash.matchella.web.rest.user.LoginDto;
-import com.bibash.matchella.web.rest.user.UserDto;
+import com.bibash.matchella.api.dto.LoginDto;
+import com.bibash.matchella.api.dto.UserDto;
 
 @Component
 public class LoginService {

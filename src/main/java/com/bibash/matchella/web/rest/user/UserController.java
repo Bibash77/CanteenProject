@@ -2,6 +2,8 @@ package com.bibash.matchella.web.rest.user;
 
 import java.util.Date;
 
+import com.bibash.matchella.api.dto.LoginDto;
+import com.bibash.matchella.api.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
